@@ -192,10 +192,10 @@
   .open-invitation-btn{padding:16px 38px;border:1px solid var(--brown);background:transparent;color:var(--brown);font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:4px;text-transform:uppercase;cursor:pointer;transition:background .35s ease,color .35s ease,transform .35s ease;}
   .open-invitation-btn:hover{background:var(--brown);color:var(--cream);transform:translateY(-2px);}
   .petals{position:fixed;inset:0;z-index:900;overflow:hidden;pointer-events:none;}
-  .petal{position:absolute;top:-40px;width:14px;height:20px;border-radius:70% 30% 65% 35%;background:linear-gradient(145deg,#d7a6a0,#a7655d);opacity:.78;filter:drop-shadow(0 2px 2px rgba(58,35,20,.10));animation:petal-fall linear forwards;}
-  .petal:nth-child(3n){background:linear-gradient(145deg,#ead0c8,#bd8178);}
-  .petal:nth-child(4n){background:linear-gradient(145deg,#c89a86,#8d5848);}
-  @keyframes petal-fall{0%{transform:translate3d(0,-5vh,0) rotate(0deg);}50%{transform:translate3d(var(--drift),50vh,0) rotate(220deg);}100%{transform:translate3d(calc(var(--drift) * -.5),110vh,0) rotate(480deg);}}
+  .petal{position:absolute;top:-40px;width:13px;height:19px;clip-path:polygon(50% 12%,68% 0,100% 25%,92% 68%,50% 100%,8% 68%,0 25%,32% 0);background:radial-gradient(circle at 48% 72%,#b87670 0 12%,#d9aaa5 42%,#f0d6d0 100%);opacity:.68;filter:drop-shadow(0 2px 2px rgba(58,35,20,.08));animation:petal-fall linear forwards;will-change:transform;}
+  .petal:nth-child(3n){background:radial-gradient(circle at 48% 72%,#c18c83 0 12%,#e5beb6 45%,#f5e2dc 100%);}
+  .petal:nth-child(4n){background:radial-gradient(circle at 48% 72%,#9f6b61 0 12%,#c9958b 45%,#e4c2b9 100%);}
+  @keyframes petal-fall{0%{transform:translate3d(0,-5vh,0) rotate(0deg) rotateY(0deg);}25%{transform:translate3d(calc(var(--drift) * .45),25vh,0) rotate(80deg) rotateY(110deg);}50%{transform:translate3d(var(--drift),52vh,0) rotate(170deg) rotateY(210deg);}75%{transform:translate3d(calc(var(--drift) * .2),80vh,0) rotate(250deg) rotateY(320deg);}100%{transform:translate3d(calc(var(--drift) * -.4),110vh,0) rotate(340deg) rotateY(430deg);}}
   @media (prefers-reduced-motion:reduce){.petals{display:none;}.music-toggle:not(.is-muted){animation:none;}}
 
   @media (max-width:400px){
@@ -249,7 +249,7 @@
         <div class="cd-item"><span class="cd-num" id="cd-seconds">00</span><span class="cd-unit">Seconds</span></div>
       </div>
 
-      <a class="location-btn" id="location-link" href="https://maps.app.goo.gl/WyzUJMAAK74JZNx96?g_st=iw" target="_blank" rel="noopener">View Location</a>
+      <a class="location-btn" id="location-link" href="https://www.google.com/maps/search/?api=1&query=La+Viola+Venue+Gardenia+House+Thawra+Street+Almazah+Suez+Road+Cairo" target="_blank" rel="noopener">View Location</a>
 
       <div class="footer-note">We can't wait to celebrate with you</div>
     </div>
@@ -291,15 +291,18 @@
     petal.className = 'petal';
     petal.style.left = Math.random() * 100 + 'vw';
     petal.style.setProperty('--drift',(Math.random() * 140 - 70) + 'px');
-    petal.style.animationDuration = (7 + Math.random() * 6) + 's';
-    petal.style.animationDelay = (Math.random() * 1.5) + 's';
+    var size = 9 + Math.random() * 8;
+    petal.style.width = size + 'px';
+    petal.style.height = (size * 1.45) + 'px';
+    petal.style.animationDuration = (13 + Math.random() * 8) + 's';
+    petal.style.animationDelay = (Math.random() * 2) + 's';
     petalsContainer.appendChild(petal);
     petal.addEventListener('animationend',function(){petal.remove();});
   }
 
   function startPetals(){
-    for(var i=0;i<18;i++) setTimeout(createPetal,i * 170);
-    setInterval(createPetal,520);
+    for(var i=0;i<12;i++) setTimeout(createPetal,i * 420);
+    setInterval(createPetal,900);
   }
 
   openInvitation.addEventListener('click',function(){
